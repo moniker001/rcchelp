@@ -8,9 +8,48 @@ This is a personal repository for storing my work for **Redo rcchelp** project f
 
 Here is a list of the current functionalities of `rcchelp`. We will determine which functionalities are to be kept, rewritten, or discarded.
 
-* ~~rccsoftware - software package specific documentation~~
+* ~~rccsoftware - software package specific documentation~~ Documentation already exists elsewhere
+  * ~~R~~
+  * ~~c~~
+  * ~~cp2k~~
+  * ~~fftw~~
+  * ~~gaussian~~
+  * ~~gcc~~
+  * ~~getpdb~~
+  * ~~gnuplot~~
+  * ~~gromacs~~
+  * ~~gromacs-plumed~~
+  * ~~hoomd~~
+  * ~~lammps~~
+  * ~~matlab~~
+  * ~~matlab-parallel~~
+  * ~~mpi~~
+  * ~~mpi4py~~
+  * ~~namd~~
+  * ~~netcdf~~
+  * ~~openfoam~~
+  * ~~pgi~~
+  * ~~python~~
+  * ~~stata~~
 * rccaccount - account related documentation and actions
+  * allocations
+  * balance
+  * checkout
+  * group-members
+  * project-quota
+  * quota
+  * restore
+  * usage
 * rccscheduler - scheduler (slurm) documentation and actions
+  * gpu
+  * pi-debalo
+  * quo
+  * sarray
+  * sbatch
+  * sepalmer
+  * sinfo
+  * sinteractive
+  * slurm
 * rcchelp all - lists all commands available
 * rcchelp search <regex> - searches all commands for those matching search term
 
