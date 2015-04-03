@@ -8,29 +8,8 @@ This is a personal repository for storing my work for **Redo rcchelp** project f
 
 Here is a list of the current functionalities of `rcchelp`. We will determine which functionalities are to be kept, rewritten, or discarded.
 
-* ~~rccsoftware - software package specific documentation~~ Documentation already exists on [website](http://docs.rcc.uchicago.edu) and with `module display $SOFTNAME.`
-  * ~~R~~
-  * ~~c~~
-  * ~~cp2k~~
-  * ~~fftw~~
-  * ~~gaussian~~
-  * ~~gcc~~
-  * ~~getpdb~~
-  * ~~gnuplot~~
-  * ~~gromacs~~
-  * ~~gromacs-plumed~~
-  * ~~hoomd~~
-  * ~~lammps~~
-  * ~~matlab~~
-  * ~~matlab-parallel~~
-  * ~~mpi~~
-  * ~~mpi4py~~
-  * ~~namd~~
-  * ~~netcdf~~
-  * ~~openfoam~~
-  * ~~pgi~~
-  * ~~python~~
-  * ~~stata~~
+* rccsoftware - software package specific documentation
+  * ~~rcchelp $SOFTNAME~~ See `module display $SOFTNAME` and the [website documentation](https://rcc.uchicago.edu/docs/).
 * rccaccount - account related documentation and actions
   * ~~allocations~~ See `accounts allocations`.
   * ~~balance~~ See `accounts balance`.
