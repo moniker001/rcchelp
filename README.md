@@ -32,14 +32,15 @@ Here is a list of the current functionalities of `rcchelp`. We will determine wh
   * ~~python~~
   * ~~stata~~
 * rccaccount - account related documentation and actions
-  * allocations
-  * balance
+  * ~~allocations~~ See `accounts allocations`.
+  * ~~balance~~ See `accounts balance`.
   * checkout
   * group-members
   * project-quota
   * quota
   * restore
-  * usage
+  * ~~usage~~ See `accounts usage`.
+  * user - See `phldap uid=<cnet>`. However, `phldap` does not display the groups the user is in.
 * rccscheduler - scheduler (slurm) documentation and actions
   * gpu
   * pi-debalo
