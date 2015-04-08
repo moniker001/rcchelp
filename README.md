@@ -21,12 +21,12 @@ Here is a list of the current functionalities of `rcchelp`. We will determine wh
   * ~~usage~~ See `accounts usage`.*
   * user - See `phldap uid=<cnet>`. However, `phldap` does not display the groups the user is in.*
 * rccscheduler - scheduler (slurm) documentation and actions
-  * gpu
-  * pi-debalo
+  * ~~gpu~~ Just documentation. Should be on website.
+  * ~~pi-depablo~~ Just documentation for pi-depablo group. Should be on website.
   * qos
-  * sarray
+  * ~~sarray~~ Just documentation. Should be on website.
   * ~~sbatch - Provides documentation for sbatch~~ See website documentation for [Using Midway](https://rcc.uchicago.edu/docs/using-midway/index.html).
-  * sepalmer
+  * ~~sepalmer~~ Just documentation fo pi-sepalmer group. Should be on website.
   * sinfo
   * ~~sinteractive - Provides documentation for sinteractive~~ See website documentation for [Using Midway](https://rcc.uchicago.edu/docs/using-midway/index.html).
   * slurm - Provides quick reference to slurm commands
