@@ -13,7 +13,7 @@ Here is a list of the current functionalities of `rcchelp`. We will determine wh
 * rccaccount - account related documentation and actions
   * ~~allocations~~ See `accounts allocations`.*
   * ~~balance~~ See `accounts balance`.*
-  * checkout
+  * ~~checkout~~ Not really needed.
   * group-members
   * ~~project-quota~~ See `project-quota [project-directory]`.*
   * ~~quota~~ See `quota [-h][-u user]` or `gpfsquota [-h][-u user].`
@@ -33,7 +33,7 @@ Here is a list of the current functionalities of `rcchelp`. We will determine wh
 * rcchelp all - lists all commands available
 * rcchelp search <regex> - searches all commands for those matching search term
 
-\*done
+\*done and implemented
 
 ## Resources
 
