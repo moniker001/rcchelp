@@ -31,9 +31,25 @@ Here is a list of the current functionalities of `rcchelp`. We will determine wh
   * ~~sinteractive - Provides documentation for sinteractive~~ See website documentation for [Using Midway](https://rcc.uchicago.edu/docs/using-midway/index.html).
   * ~~slurm - Provides quick reference to slurm commands~~ See website documentation for [Using Midway](https://rcc.uchicago.edu/docs/using-midway/index.html).
 * rcchelp all - lists all commands available
-* rcchelp search <regex> - searches all commands for those matching search term
+* ~~rcchelp search <regex> - searches all commands for those matching search term~~ Not really needed.
 
 \*done and implemented
+
+Here are the retained functionalities in the new `rcchelp`.
+
+* `allocations`
+* `balance`
+* `project-quota`
+* `quota`
+* `usage`
+* `user`
+
+TODO List
+* `group-members`
+* `user` (getting groups that user is in)
+* `all`
+* `sinfo`
+* `restore`
 
 ## Resources
 
