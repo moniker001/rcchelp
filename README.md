@@ -17,7 +17,7 @@ Here is a list of the current functionalities of `rcchelp`. We will determine wh
   * `group-members`
   * ~~`project-quota`~~ See `project-quota [project-directory]`.*
   * ~~`quota`~~ See `quota [-h][-u user]` or `gpfsquota [-h][-u user].`
-  * `restore`
+  * `restore` Out of date?
   * ~~`usage`~~ See `accounts usage`.*
   * `user` - See `phldap uid=<cnet>`. However, `phldap` does not display the groups the user is in.*
 * rccscheduler - scheduler (slurm) documentation and actions
