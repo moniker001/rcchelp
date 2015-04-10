@@ -29,7 +29,7 @@ Here is a list of the current functionalities of `rcchelp`. We will determine wh
   * ~~sepalmer~~ Just documentation fo pi-sepalmer group. Should be on website.
   * sinfo
   * ~~sinteractive - Provides documentation for sinteractive~~ See website documentation for [Using Midway](https://rcc.uchicago.edu/docs/using-midway/index.html).
-  * slurm - Provides quick reference to slurm commands
+  * ~~slurm - Provides quick reference to slurm commands~~ See website documentation for [Using Midway](https://rcc.uchicago.edu/docs/using-midway/index.html).
 * rcchelp all - lists all commands available
 * rcchelp search <regex> - searches all commands for those matching search term
 
