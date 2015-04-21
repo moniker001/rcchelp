@@ -37,6 +37,7 @@ Here is a list of the current functionalities of `rcchelp`. We will determine wh
 
 Here are the retained functionalities in the new `rcchelp` that have been implemented.
 
+* `all`
 * `allocations`
 * `balance`
 * `group-members`
@@ -47,7 +48,7 @@ Here are the retained functionalities in the new `rcchelp` that have been implem
 * `user`
 
 Here are the functionalities that are yet to be implemented.
-* `all`
+
 * `sinfo`
 * `qos`
 
