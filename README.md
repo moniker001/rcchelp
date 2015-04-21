@@ -13,25 +13,25 @@ Here is a list of the current functionalities of `rcchelp`. We will determine wh
 * rccaccount - account related documentation and actions
   * ~~`allocations`~~ See `accounts allocations`.*
   * ~~`balance`~~ See `accounts balance`.*
-  * ~~`checkout`~~ Not really needed.
-  * ~~`group-members`~~ See `getent group [group]`
+  * ~~`checkout`~~ Not really needed.*
+  * ~~`group-members`~~ See `getent group [group]`.*
   * ~~`project-quota`~~ See `project-quota [project-directory]`.*
-  * ~~`quota`~~ See `quota [-h][-u user]` or `gpfsquota [-h][-u user].`
-  * `restore` Out of date?
+  * ~~`quota`~~ See `quota [-h][-u user]` or `gpfsquota [-h][-u user]`.*
+  * ~~`restore`~~ See `restore [file] [[folder]]`.*
   * ~~`usage`~~ See `accounts usage`.*
   * ~~`user`~~ - See `phldap uid=[cnet]` and `group [cnet]`.*
 * rccscheduler - scheduler (slurm) documentation and actions
-  * ~~`gpu`~~ Just documentation. Should be on website.
-  * ~~`pi-depablo`~~ Just documentation for pi-depablo group. Should be on website.
+  * ~~`gpu`~~ Just documentation. Should be on website.*
+  * ~~`pi-depablo`~~ Just documentation for pi-depablo group. Should be on website.*
   * `qos`
-  * ~~`sarray`~~ Just documentation. Should be on website.
-  * ~~`sbatch` - Provides documentation for sbatch~~ See website documentation for [Using Midway](https://rcc.uchicago.edu/docs/using-midway/index.html).
-  * ~~`sepalmer`~~ Just documentation fo pi-sepalmer group. Should be on website.
+  * ~~`sarray`~~ Just documentation. Should be on website.*
+  * ~~`sbatch` - Provides documentation for sbatch~~ See website documentation for [Using Midway](https://rcc.uchicago.edu/docs/using-midway/index.html).*
+  * ~~`sepalmer`~~ Just documentation fo pi-sepalmer group. Should be on website.*
   * `sinfo`
-  * ~~`sinteractive` - Provides documentation for sinteractive~~ See website documentation for [Using Midway](https://rcc.uchicago.edu/docs/using-midway/index.html).
-  * ~~`slurm` - Provides quick reference to slurm commands~~ See website documentation for [Using Midway](https://rcc.uchicago.edu/docs/using-midway/index.html).
+  * ~~`sinteractive` - Provides documentation for sinteractive~~ See website documentation for [Using Midway](https://rcc.uchicago.edu/docs/using-midway/index.html).*
+  * ~~`slurm` - Provides quick reference to slurm commands~~ See website documentation for [Using Midway](https://rcc.uchicago.edu/docs/using-midway/index.html).*
 * `rcchelp all` - lists all commands available
-* ~~`rcchelp search <regex>` - searches all commands for those matching search term~~ Not really needed.
+* ~~`rcchelp search <regex>` - searches all commands for those matching search term~~ Not really needed.*
 
 \*done and implemented
 
@@ -39,16 +39,16 @@ Here are the retained functionalities in the new `rcchelp` that have been implem
 
 * `allocations`
 * `balance`
-* `usage`
+* `group-members`
 * `project-quota`
 * `quota`
+* `restore`
+* `usage`
 * `user`
-* `group-members`
 
 Here are the functionalities that are yet to be implemented.
 * `all`
 * `sinfo`
-* `restore`
 * `qos`
 
 ## Resources
