@@ -14,12 +14,12 @@ Here is a list of the current functionalities of `rcchelp`. We will determine wh
   * ~~`allocations`~~ See `accounts allocations`.*
   * ~~`balance`~~ See `accounts balance`.*
   * ~~`checkout`~~ Not really needed.
-  * `group-members`
+  * ~~`group-members`~~ See `getent group [group]`
   * ~~`project-quota`~~ See `project-quota [project-directory]`.*
   * ~~`quota`~~ See `quota [-h][-u user]` or `gpfsquota [-h][-u user].`
   * `restore` Out of date?
   * ~~`usage`~~ See `accounts usage`.*
-  * `user` - See `phldap uid=<cnet>`. However, `phldap` does not display the groups the user is in.*
+  * ~~`user`~~ - See `phldap uid=[cnet]` and `group [cnet]`.*
 * rccscheduler - scheduler (slurm) documentation and actions
   * ~~`gpu`~~ Just documentation. Should be on website.
   * ~~`pi-depablo`~~ Just documentation for pi-depablo group. Should be on website.
@@ -43,10 +43,9 @@ Here are the retained functionalities in the new `rcchelp` that have been implem
 * `project-quota`
 * `quota`
 * `user`
+* `group-members`
 
 Here are the functionalities that are yet to be implemented.
-* `group-members`
-* `user` (getting groups that user is in)
 * `all`
 * `sinfo`
 * `restore`
