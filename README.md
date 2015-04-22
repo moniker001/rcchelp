@@ -27,7 +27,7 @@ Here is a list of the current functionalities of `rcchelp`. We will determine wh
   * ~~`sarray`~~ Just documentation. Should be on website.*
   * ~~`sbatch` - Provides documentation for sbatch~~ See website documentation for [Using Midway](https://rcc.uchicago.edu/docs/using-midway/index.html).*
   * ~~`sepalmer`~~ Just documentation fo pi-sepalmer group. Should be on website.*
-  * `sinfo`
+  * `sinfo` - See [Slurm docs on sinfo options](https://computing.llnl.gov/linux/slurm/sinfo.html)
   * ~~`sinteractive` - Provides documentation for sinteractive~~ See website documentation for [Using Midway](https://rcc.uchicago.edu/docs/using-midway/index.html).*
   * ~~`slurm` - Provides quick reference to slurm commands~~ See website documentation for [Using Midway](https://rcc.uchicago.edu/docs/using-midway/index.html).*
 * `rcchelp all` - lists all commands available
