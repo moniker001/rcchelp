@@ -46,10 +46,10 @@ Here are the retained functionalities in the new `rcchelp` that have been implem
 * `restore`
 * `usage`
 * `user`
+* `sinfo`
 
 Here are the functionalities that are yet to be implemented.
 
-* `sinfo`
 * `qos`
 
 ## Resources
