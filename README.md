@@ -43,7 +43,6 @@ Here are the retained functionalities in the new `rcchelp` that have been implem
 * `group-members`
 * `project-quota`
 * `quota`
-* `restore`
 * `usage`
 * `user`
 * `sinfo`
@@ -54,6 +53,7 @@ Here are the functionalities that are yet to be implemented.
 * Logging
 * More `sinfo` and `qos` options
 * Nicer format for `user` and `group-members`
+* `restore`
 
 ## Resources
 
