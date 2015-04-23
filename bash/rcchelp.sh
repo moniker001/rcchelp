@@ -90,8 +90,29 @@ printSoftware () {
 
 # Displays all members in specified group
 printGroup () {
-  # TODO - formatting
-  getent group $1
+  info=$(getent group $1)
+  groupname=$(echo $info | cut --fields=1 --delimiter=':')
+  if [ ${#groupname} -gt 0 ]; then
+    echo "        Group Name    : $groupname"
+    groupid=$(echo $info | cut --fields=3 --delimiter=':')
+    echo "        Group ID      : $groupid"
+    members=$(echo $info | cut --fields=4 --delimiter=':')
+    member=$(echo $members | cut --fields=1 --delimiter=',')
+    echo "        Group Members : $member"
+    i=2
+    while true; do
+      member=$(echo $info | cut --fields=$i --delimiter=',')
+      echo "                        $member"
+      if [ ${#member} -le 0 ]; then
+        break
+      fi
+      i=$(($i+1))
+    done
+  else
+    echo "        No RCC groups found with that name or group ID"
+    echo "        Usage:"
+    echo "                rcchelp group-members <group name or gid>"
+  fi
 }
 
 printPQuota () {
@@ -111,8 +132,37 @@ printUsage () {
 # Displays detailed infomation on specified user
 printUser () {
   # TODO - formatting
-  phldap uid=$1
-  groups $1
+  userinfo=$(phldap uid=$1)
+  if [ ${#userinfo} -gt 0 ]; then
+    echo $userinfo
+    echo "---"
+    # print user information
+    info1=$(echo $userinfo | cut --fields=3 --delimiter=':')
+    echo ${info1:0:-5}
+    echo "---"
+
+    # print names of groups
+    groupinfo=$(groups $1)
+    group1=$(echo $groupinfo | cut --fields=3 --delimiter=' ')
+    if [ ${#group1} -gt 0 ]; then
+      echo "        Member of  : $group1"
+      i=4
+      while true; do
+        group2=$(echo $groupinfo | cut --fields=$i --delimiter=' ')
+        echo "                     $group2"
+        if [ ${#group2} -le 0 ]; then
+          break
+        fi
+        i=$(($i+1))
+      done
+    else
+      echo "        Member of  : No RCC groups"
+    fi
+  else
+    echo "        No user found in the UChicago Directory with that username"
+    echo "        Usage:"
+    echo "                rcchelp user <username / CNET ID>"
+  fi
 }
 
 # Restores a file to a given folder or (by default) the file's original location based on a snapshot
