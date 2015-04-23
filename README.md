@@ -52,7 +52,7 @@ Here are the retained functionalities in the new `rcchelp` that have been implem
 Here are the functionalities that are yet to be implemented.
 * Logging
 * More `sinfo` and `qos` options
-* Nicer format for `user` and `group-members`
+* Nicer format for `user`
 * `restore`
 
 ## Resources
