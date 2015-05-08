@@ -31,8 +31,8 @@ printFooter () {
 
 # Displays list of all rcchelp commands
 printAll () {
-  echo "        All commands are preceded by \"rcchelp\"                               "
-  echo "        Some commands may only work on Midway, such as \"quota\"               "
+  echo "        All commands are preceded by \"rcchelp\". Some commands may only       "
+  echo "        work on Midway, such as \"quota\" and \"project-quota\".               "
   echo "-------------------------------------------------------------------------------"
   echo "        COMMAND              DESCRIPTION                                       "
   echo
@@ -117,6 +117,7 @@ printGroup () {
   fi
 }
 
+# Displays quota information for project folder
 printPQuota () {
   project-quota $1
 }
@@ -132,8 +133,7 @@ printUsage () {
 }
 
 getPrefix () {
-  userinfo="$1"
-  info=$(echo $userinfo | cut --fields=$2 --delimiter=':')
+  info=$(echo $1 | cut --fields=$2 --delimiter=':')
   if [ ${#info} -gt 0 ]; then
     if echo "$info" | grep -q "cn"; then
       echo "        Name        :"
@@ -156,10 +156,7 @@ getPrefix () {
 }
 
 removeLast () {
-  #echo hi
-  userinfo="$1"
-  #echo $userinfo
-  info=$(echo $userinfo | cut --fields=$2 --delimiter=':')
+  info=$(echo $1 | cut --fields=$2 --delimiter=':')
   if [ ${#info} -gt 0 ]; then
     field1=$(echo $info | cut --field=1 --delimiter=' ')
     if [[ $info == *"@uchicago.edu"* ]]; then
@@ -240,7 +237,12 @@ printUser () {
 # Restores a file to a given folder or (by default) the file's original location based on a snapshot
 printRestore () {
   #TODO
-  restore $1 $2
+  path=$(pwd)
+  
+  
+  dirs=$(cd /snapshots/$snapshot/$path ; ls)\
+  echo $dirs
+  
 }
 
 # Displays information on available Slurm queues
