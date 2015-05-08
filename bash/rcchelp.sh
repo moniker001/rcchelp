@@ -52,7 +52,8 @@ printAll () {
   echo "                             \"rcchelp project-quota [project directory]\"     "
   echo
   echo "        qos                  Displays information on Slurm QoS                 "
-  echo "                             \"rcchelp qos\"                                   "
+  echo "                             Set options to \"-v\" for verbose display         "
+  echo "                             \"rcchelp qos [[option]]\"                        "
   echo
   echo "        quota                Displays your file system usage and limits        "
   echo "                             \"rcchelp user [cnet id]\"                        "
@@ -62,7 +63,8 @@ printAll () {
   echo "                             \"rcchelp restore [file] [[destination]]\"        "
   echo
   echo "        sinfo                Displays information on available Slurm queues    "
-  echo "                             \"rcchelp sinfo [[options]]\"                     "
+  echo "                             Set options to \"-v\" for verbose display         "
+  echo "                             \"rcchelp sinfo [[option]]\"                      "
   echo
   echo "        usage                Displays your consumption of SUs                  "
   echo "                             \"rcchelp usage\"                                 "
@@ -129,17 +131,42 @@ printUsage () {
   accounts usage
 }
 
-foo() {
-  echo "Function name:  ${FUNCNAME}"
-  echo "The number of positional parameter : $#"
-  echo "All parameters or arguments passed to the function: '$@'"
-  echo
+getPrefix () {
+  userinfo="$1"
+  info=$(echo $userinfo | cut --fields=$2 --delimiter=':')
+  if [ ${#info} -gt 0 ]; then
+    if echo "$info" | grep -q "cn"; then
+      echo "        Name        :"
+    elif echo "$info" | grep -q "title"; then
+      echo "        Title       :"
+    elif echo "$info" | grep -q "eduPersonPrimaryAffiliation"; then
+      echo "        Affiliation :"
+    elif echo "$info" | grep -q "uid"; then
+      echo "        Cnet ID     :"
+    elif echo "$info" | grep -q "ucDepartment"; then
+      echo "        Department  :"
+    elif echo "$info" | grep -q "chicagoID"; then
+      echo "        Chicago ID  :"
+    elif echo "$info" | grep -q "telephoneNumber"; then
+      echo "        Phone       :"
+    elif echo "$info" | grep -q "mail"; then
+      echo "        Email       :"
+    fi
+  fi
 }
 
 removeLast () {
-    userinfo=$(phldap uid=$1)
-    info=$(echo $userinfo | cut --fields=$2 --delimiter=':')
+  #echo hi
+  userinfo="$1"
+  #echo $userinfo
+  info=$(echo $userinfo | cut --fields=$2 --delimiter=':')
+  if [ ${#info} -gt 0 ]; then
     field1=$(echo $info | cut --field=1 --delimiter=' ')
+    if [[ $info == *"@uchicago.edu"* ]]; then
+      result=$field1
+      echo $result
+      return
+    fi
     field2=$(echo $info | cut --field=2 --delimiter=' ')
     space=" "
     result=$field1$space$field2
@@ -161,172 +188,34 @@ removeLast () {
         j=$(($j+1))
       done
     else
-      echo "Error: No department"
+      echo "Error: empty field"
     fi
-    echo $result
+  fi
+  echo $result
 }
 
 # Displays detailed infomation on specified user
 printUser () {
-  # TODO - formatting
-  
-  userinfo=$(phldap uid=$1)
-  if [ ${#userinfo} -gt 0 ]; then
+  # Obtain phldap data on user
+  user="$(phldap uid="$1")"
 
-    # print full name
-    echo "        Name       : $(removeLast $1 3)"
-    echo "        Title      : $(removeLast $1 4)"
-    echo 
-    echo -------------------------------------------
-    info1=$(echo $userinfo | cut --fields=3 --delimiter=':')
-    name1=$(echo $info1 | cut --field=1 --delimiter=' ')
-    name2=$(echo $info1 | cut --field=2 --delimiter=' ')
-    space=" "
-    fullname=$name1$space$name2
-    if [ ${#name2} -gt 0 ]; then
-      i=3
-      j=4
-      while true; do
-        name3=$(echo $info1 | cut --field=$i --delimiter=' ')
-        name4=$(echo $info1 | cut --field=$j --delimiter=' ')
-        if [ ${#name4} -le 0 ]; then
-          break
-        fi
-        fullname=$fullname$space$name3
-        i=$(($i+1))
-        j=$(($j+1))
-      done
-    else
-      echo "Error: No name"
-    fi
-    echo "        Name       : $fullname"
-
-    # print title
-    info2=$(echo $userinfo | cut --fields=4 --delimiter=':')
-    field1=$(echo $info2 | cut --field=1 --delimiter=' ')
-    field2=$(echo $info2 | cut --field=2 --delimiter=' ')
-    space=" "
-    title=$field1$space$field2
-    if [ ${#field2} -gt 0 ]; then
-      i=3
-      j=4
-      while true; do
-        field3=$(echo $info2 | cut --field=$i --delimiter=' ')
-        if [ ${#field3} -le 0 ]; then
-          title=$field1
-          break
-        fi
-        field4=$(echo $info2 | cut --field=$j --delimiter=' ')
-        if [ ${#field4} -le 0 ]; then
-          break
-        fi
-        title=$title$space$field3
-        i=$(($i+1))
-        j=$(($j+1))
-      done
-    else
-      echo "Error: No title"
-    fi
-    echo "        Title      : $title"
+  if [ ${#user} -gt 0 ]; then
+    # print out user info until email
+    for i in `seq 2 10`;
+    do
+      j=$(($i+1))
+      output=$(echo "$(getPrefix "$user" $i) $(removeLast "$user" $j)")
+      if [ ${#output} -gt 1 ]; then
+        echo "$output"
+      fi
+    done
     
-    # print affiliation
-    info3=$(echo $userinfo | cut --fields=5 --delimiter=':')
-    aff1=$(echo $info3 | cut --field=1 --delimiter=' ')
-    aff2=$(echo $info3 | cut --field=2 --delimiter=' ')
-    space=" "
-    affiliation=$aff1$space$aff2
-    if [ ${#aff2} -gt 0 ]; then
-      i=3
-      j=4
-      while true; do
-        aff3=$(echo $info3 | cut --field=$i --delimiter=' ')
-        if [ ${#aff3} -le 0 ]; then
-          affiliation=$aff1
-          break
-        fi        
-        aff4=$(echo $info3 | cut --field=$j --delimiter=' ')
-        if [ ${#aff4} -le 0 ]; then
-          break
-        fi
-        affiliation=$affiliation$space$aff3
-        i=$(($i+1))
-        j=$(($j+1))
-      done
-    else
-      echo "Error: No title"
-    fi
-    echo "        Affiliation: $affiliation"
-
-    # print cnet
-    info4=$(echo $userinfo | cut --fields=6 --delimiter=':')
-    cnet=$(echo $info4 | cut --field=1 --delimiter=' ')
-    if [ ${#cnet} -gt 0 ]; then
-      echo "        Cnet ID    : $cnet"
-    else
-      echo "Error: No cnet"
-    fi
-    
-    # print department
-    info5=$(echo $userinfo | cut --fields=7 --delimiter=':')
-    dep1=$(echo $info5 | cut --field=1 --delimiter=' ')
-    dep2=$(echo $info5 | cut --field=2 --delimiter=' ')
-    space=" "
-    department=$dep1$space$dep2
-    if [ ${#dep2} -gt 0 ]; then
-      i=3
-      j=4
-      while true; do
-        dep3=$(echo $info5 | cut --field=$i --delimiter=' ')
-        if [ ${#dep3} -le 0 ]; then
-          department=$dep1
-          break
-        fi        
-        dep4=$(echo $info5 | cut --field=$j --delimiter=' ')
-        if [ ${#dep4} -le 0 ]; then
-          break
-        fi
-        department=$department$space$dep3
-        i=$(($i+1))
-        j=$(($j+1))
-      done
-    else
-      echo "Error: No department"
-    fi
-    echo "        Department : $department"
-    
-    # print ChicagoID
-    info6=$(echo $userinfo | cut --fields=8 --delimiter=':')
-    chicagoid=$(echo $info6 | cut --field=1 --delimiter=' ')
-    if [ ${#chicagoid} -gt 0 ]; then
-      echo "        ChicagoID  : $chicagoid"
-    else
-      echo "Error: No ChicagoID"
-    fi
-    
-    # print phone number
-    info=$(echo $userinfo | cut --fields=9 --delimiter=':')
-    phone=$(echo $info | cut --field=1 --delimiter=' ')
-    if [ ${#phone} -gt 0 ]; then
-      echo "        Phone      : $phone"
-    else
-      echo "Error: No phone number"
-    fi
-
-    # print email
-    info=$(echo $userinfo | cut --fields=10 --delimiter=':')
-    email=$(echo $info | cut --field=1 --delimiter=' ')
-    if [ ${#email} -gt 0 ]; then
-      echo "        Email      : $email"
-    else
-      echo "Error: No email"
-    fi
-
-    # print names of groups
+    # Print names of groups
     groupinfo=$(groups $1)
     group1=$(echo $groupinfo | cut --fields=3 --delimiter=' ')
     if [ ${#group1} -gt 0 ]; then
       groupnum=$(getent group $group1 | cut --fields=3 --delimiter=':')
-      echo "        Member of  : $groupnum($group1)"
+      echo "        Member of   : $groupnum($group1)"
       i=4
       while true; do
         group2=$(echo $groupinfo | cut --fields=$i --delimiter=' ')
@@ -334,13 +223,14 @@ printUser () {
           break
         fi
         groupnum2=$(getent group $group2 | cut --fields=3 --delimiter=':')
-        echo "                     $groupnum2($group2)"
+        echo "                      $groupnum2($group2)"
         i=$(($i+1))
       done
     else
-      echo "        Member of  : No RCC groups"
+      echo "        Member of   : No RCC groups"
     fi
   else
+    # User not found
     echo "        No user found in the UChicago Directory with that username"
     echo "        Usage:"
     echo "                rcchelp user <username / CNET ID>"
@@ -362,7 +252,6 @@ printSinfo () {
   -v)
     # verbose display
     sinfo --long
-    # TODO - add more sinfo options
     ;;
   *)
     # default display
