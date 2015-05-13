@@ -237,12 +237,52 @@ printUser () {
 # Restores a file to a given folder or (by default) the file's original location based on a snapshot
 printRestore () {
   #TODO
-  path=$(pwd)
+  echo "        To guard against accidental deletion of files, the Home/Project        "
+  echo "        partition is snapshotted hourly, daily, and weekly. Snapshots          "
+  echo "        are located in /snapshots on Midway. In order to restore a file        "
+  echo "        from a snapshot, either:                                               "
+  echo "        (a) copy manually from the snapshots directory, or                     "
+  echo "        (a) run \"rcchelp restore [file] [[snapshot dir]] [[-r]]\" in          "
+  echo "            the folder where the file was originally located                   "
+  echo "        By default, the \"rcchelp restore\" command will restore from          "
+  echo "        the most recent hourly snapshot, unless the snapshot folder is         "
+  echo "        specified.                                                             "
   
+  current=$(pwd)
+  if [[ $current == *"project"* ]]; then
+    dir="project"
+  elif [[ $current == *"home"* ]]; then
+    dir="home"
+  else
+    echo "Current directory is not in \"project\" or \"home\""
+  fi
   
-  dirs=$(cd /snapshots/$snapshot/$path ; ls)\
-  echo $dirs
+  allsnapshots=$(cd /snapshots/home ; ls)
+  if [[ $allsnapshots == *$2* ]]; then
+    snapshot="$2"
+  else
+    snapshot=$(echo $allsnapshots | cut --field=11 --delimiter=' ')
+  fi
+  path=/snapshots/$dir/$snapshot$current
+  printFooter
   
+  echo
+  echo "As long as no errors occur, will attempt to restore file from:"
+  echo "  $path/$1"
+  echo "to the current working directory as:"
+  echo "  $current/$1"
+  echo
+  read -p "Are you sure this is correct [y/n]? " -n 1 -r
+  echo
+  if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+    exit 1
+  else
+    if [ $3 != "-r" ] && [ $2 != "-r" ] ; then
+      cp $path/$1 $current/$1
+    else
+      cp -r $path/$1 $current/$1
+  fi
+
 }
 
 # Displays information on available Slurm queues
@@ -303,36 +343,47 @@ rcchelp () {
   printHeader
   case "$1" in
     software)
-      printSoftware $2 ;;
+      printSoftware "$2"
+      printFooter ;;
     allocations)
-      printAllocations ;;
+      printAllocations
+      printFooter ;;
     balance)
-      printBalance ;;
+      printBalance
+      printFooter ;;
     usage)
-      printUsage ;;
+      printUsage
+      printFooter ;;
     group-members)
-      printGroup $2 ;;
+      printGroup "$2"
+      printFooter ;;
     project-quota)
-      printPQuota $2 ;;
+      printPQuota "$2"
+      printFooter ;;
     quota)
-      printQuota $2 ;;
+      printQuota "$2"
+      printFooter ;;
     restore)
-      printRestore $2 $3 ;;
+      printRestore "$2" "$3" "$4" ;;
     user)
-      printUser $2 ;;
+      printUser "$2"
+      printFooter ;;
     qos)
-      printQos $2 ;;
+      printQos "$2"
+      printFooter ;;
     sinfo)
-      printSinfo $2 ;;
+      printSinfo "$2"
+      printFooter ;;
     all)
-      printAll ;;
+      printAll
+      printFooter ;;
     *)
       # Display list of rcchelp commands for bad commands
-      printAll ;;
+      printAll
+      printFooter ;;
   esac
-  printFooter
 }
 
 # Call function with input parameters
-rcchelp $1 $2
+rcchelp "$1" "$2" "$3" "$4"
 
