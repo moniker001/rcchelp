@@ -59,8 +59,9 @@ printAll () {
   echo "                             \"rcchelp user [cnet id]\"                        "
   echo
   echo "        restore              Restores a file to a given folder or (by default) "
-  echo "                             the file's original location based on a snapshot  "
-  echo "                             \"rcchelp restore [file] [[destination]]\"        "
+  echo "                             the file's original location based on a snapshot. "
+  echo "                             Use option \"-r\" when restoring a directory.     "
+  echo "                             \"rcchelp restore [file] [[snapshot dir]] [[-r]]\""
   echo
   echo "        sinfo                Displays information on available Slurm queues    "
   echo "                             Set options to \"-v\" for verbose display         "
@@ -236,7 +237,6 @@ printUser () {
 
 # Restores a file to a given folder or (by default) the file's original location based on a snapshot
 printRestore () {
-  #TODO
   echo "        To guard against accidental deletion of files, the Home/Project        "
   echo "        partition is snapshotted hourly, daily, and weekly. Snapshots          "
   echo "        are located in /snapshots on Midway. In order to restore a file        "
@@ -247,42 +247,46 @@ printRestore () {
   echo "        By default, the \"rcchelp restore\" command will restore from          "
   echo "        the most recent hourly snapshot, unless the snapshot folder is         "
   echo "        specified.                                                             "
-  
-  current=$(pwd)
-  if [[ $current == *"project"* ]]; then
-    dir="project"
-  elif [[ $current == *"home"* ]]; then
-    dir="home"
-  else
-    echo "Current directory is not in \"project\" or \"home\""
-  fi
-  
-  allsnapshots=$(cd /snapshots/home ; ls)
-  if [[ $allsnapshots == *$2* ]]; then
-    snapshot="$2"
-  else
-    snapshot=$(echo $allsnapshots | cut --field=11 --delimiter=' ')
-  fi
-  path=/snapshots/$dir/$snapshot$current
   printFooter
-  
-  echo
-  echo "As long as no errors occur, will attempt to restore file from:"
-  echo "  $path/$1"
-  echo "to the current working directory as:"
-  echo "  $current/$1"
-  echo
-  read -p "Are you sure this is correct [y/n]? " -n 1 -r
-  echo
-  if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-    exit 1
-  else
-    if [ $3 != "-r" ] && [ $2 != "-r" ] ; then
-      cp $path/$1 $current/$1
+  if [ ${#1} -gt 0 ]; then
+    current=$(pwd)
+    if [[ $current == *"project"* ]]; then
+      dir="project"
+    elif [[ $current == *"home"* ]]; then
+      dir="home"
     else
-      cp -r $path/$1 $current/$1
+      echo "Current directory is not in \"project\" or \"home\""
+    fi
+    
+    allsnapshots=$(cd /snapshots/home ; ls)
+    if [ ${#2} -le 0 ]; then
+      snapshot=$(echo $allsnapshots | cut --field=11 --delimiter=' ')
+    elif [[ $allsnapshots == *$2* ]]; then
+      snapshot="$2"
+    else
+      snapshot=$(echo $allsnapshots | cut --field=11 --delimiter=' ')
+    fi
+    path=/snapshots/$dir/$snapshot$current
+    
+    echo
+    echo "Will attempt to restore file from:"
+    echo "  $path/$1"
+    echo "to the current working directory as:"
+    echo "  $current/$1"
+    echo
+    read -p "Are you sure this is correct [y/n]? " -n 1 -r
+    echo
+    
+    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+      exit 1
+    else
+      if [ "$3" != "-r" ] && [ "$2" != "-r" ] ; then
+        cp $path/$1 $current/$1
+      else
+        cp -r $path/$1 $current/$1
+      fi
+    fi
   fi
-
 }
 
 # Displays information on available Slurm queues
