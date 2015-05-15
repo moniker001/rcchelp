@@ -17,7 +17,7 @@ Here are the retained functionalities in the new `rcchelp` that have been implem
 |`project-quota`|Displays quota information for project folder.|
 |`qos`|Displays information on Slurm QoS. Use option `-v` for verbose display.|
 |`quota`|Displays your file system usage and limits.|
-|`restore`|Restores a file to the current folder based on a specified snapshot or (by default) the most recent snapshot. Use option `-r` when restoring a directory.|
+|`restore`|Restores a file to the current folder based on the most recent hourly snapshot, unless a snapshot directory is specified. Be careful not to unintentionally overwrite files. Use option `-r` when restoring a directory.|
 |`sinfo`|Displays information on available Slurm queues. Use option `-v` for verbose display.|
 |`usage`|Displays your consumption of SUs.|
 |`user`|Displays detailed infomation on specified user.|
