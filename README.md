@@ -6,7 +6,23 @@ This is a personal repository for storing my work for **Redo rcchelp** project f
 
 ## Functionalities
 
-Here is a list of the current functionalities of `rcchelp`. We will determine which functionalities are to be kept, rewritten, or discarded.
+Here are the retained functionalities in the new `rcchelp` that have been implemented.
+
+| Command  | Description |
+|----------|-------------|
+|`all`|Displays list of all rcchelp commands.|
+|`allocations`|Displays your allocations of SUs.|
+|`balance`|Displays your remaining balance of SUs.|
+|`group-members`|Displays all members in specified group.|
+|`project-quota`|Displays quota information for project folder.|
+|`qos`|Displays information on Slurm QoS. Use option `-v` for verbose display.|
+|`quota`|Displays your file system usage and limits.|
+|`restore`|Restores a file to a given folder or (by default) the file's original location based on a snapshot. Use option `-r` when restoring a directory.|
+|`sinfo`|Displays information on available Slurm queues. Use option `-v` for verbose display.|
+|`usage`|Displays your consumption of SUs.|
+|`user`|Displays detailed infomation on specified user.|
+
+Here is a list of the current functionalities of the old `rcchelp`. We will determine which functionalities are to be kept, rewritten, or discarded.
 
 * rccsoftware - software package specific documentation
   * ~~rcchelp $SOFTNAME~~ See `module display $SOFTNAME` and the [website documentation](https://rcc.uchicago.edu/docs/).
@@ -34,24 +50,6 @@ Here is a list of the current functionalities of `rcchelp`. We will determine wh
 * ~~`rcchelp search <regex>` - searches all commands for those matching search term~~*
 
 \*done and implemented
-
-Here are the retained functionalities in the new `rcchelp` that have been implemented.
-
-* `all`
-* `allocations`
-* `balance`
-* `group-members`
-* `project-quota`
-* `quota`
-* `usage`
-* `user`
-* `restore`
-* `sinfo`
-* `qos`
-
-Here are the functionalities that are yet to be implemented.
-
-nada
 
 ## Resources
 
