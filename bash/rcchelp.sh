@@ -52,20 +52,21 @@ printAll () {
   echo "                             \"rcchelp project-quota [project directory]\"     "
   echo
   echo "        qos                  Displays information on Slurm QoS                 "
-  echo "                             Set options to \"-v\" for verbose display         "
-  echo "                             \"rcchelp qos [[option]]\"                        "
+  echo "                             Use option \"-v\" for verbose display             "
+  echo "                             \"rcchelp qos [[-v]]\"                            "
   echo
   echo "        quota                Displays your file system usage and limits        "
   echo "                             \"rcchelp user [cnet id]\"                        "
   echo
-  echo "        restore              Restores a file to a given folder or (by default) "
-  echo "                             the file's original location based on a snapshot. "
-  echo "                             Use option \"-r\" when restoring a directory.     "
+  echo "        restore              Restores a file to the current folder based on a  "
+  echo "                             specified snapshot or (by default) the most       "
+  echo "                             recent. Use option \"-r\" when restoring a        "
+  echo "                             directory.                                        "
   echo "                             \"rcchelp restore [file] [[snapshot dir]] [[-r]]\""
   echo
   echo "        sinfo                Displays information on available Slurm queues    "
-  echo "                             Set options to \"-v\" for verbose display         "
-  echo "                             \"rcchelp sinfo [[option]]\"                      "
+  echo "                             Use option \"-v\" for verbose display         "
+  echo "                             \"rcchelp sinfo [[-v]]\"                      "
   echo
   echo "        usage                Displays your consumption of SUs                  "
   echo "                             \"rcchelp usage\"                                 "
