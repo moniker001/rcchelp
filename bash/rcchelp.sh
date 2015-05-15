@@ -211,6 +211,7 @@ printUser () {
     
     # Print names of groups
     groupinfo=$(groups $1)
+    
     group1=$(echo $groupinfo | cut --fields=3 --delimiter=' ')
     if [ ${#group1} -gt 0 ]; then
       groupnum=$(getent group $group1 | cut --fields=3 --delimiter=':')
@@ -228,6 +229,7 @@ printUser () {
     else
       echo "        Member of   : No RCC groups"
     fi
+
   else
     # User not found
     echo "        No user found in the UChicago Directory with that username"
@@ -247,8 +249,9 @@ printRestore () {
   echo "            the folder where the file was originally located                   "
   echo "        By default, the \"rcchelp restore\" command will restore from          "
   echo "        the most recent hourly snapshot, unless the snapshot folder is         "
-  echo "        specified.                                                             "
-  printFooter
+  echo "        specified. Be careful not to unintentionally overwrite files.          "
+  echo "        Use option \"-r\" when restoring a directory.                          "
+
   if [ ${#1} -gt 0 ]; then
     current=$(pwd)
     if [[ $current == *"project"* ]]; then
@@ -279,6 +282,7 @@ printRestore () {
     echo
     
     if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+      printFooter
       exit 1
     else
       if [ "$3" != "-r" ] && [ "$2" != "-r" ] ; then
@@ -302,7 +306,7 @@ printSinfo () {
     ;;
   *)
     # default display
-    sinfo -o "%9P %R %6D %3c %7g %28f %22N"
+    sinfo -o "%9P %6D %3c %7g %28f %22N"
     ;;
   esac
 }
@@ -348,45 +352,34 @@ rcchelp () {
   printHeader
   case "$1" in
     software)
-      printSoftware "$2"
-      printFooter ;;
+      printSoftware "$2" ;;
     allocations)
-      printAllocations
-      printFooter ;;
+      printAllocations ;;
     balance)
-      printBalance
-      printFooter ;;
+      printBalance ;;
     usage)
-      printUsage
-      printFooter ;;
+      printUsage ;;
     group-members)
-      printGroup "$2"
-      printFooter ;;
+      printGroup "$2" ;;
     project-quota)
-      printPQuota "$2"
-      printFooter ;;
+      printPQuota "$2" ;;
     quota)
-      printQuota "$2"
-      printFooter ;;
+      printQuota "$2" ;;
     restore)
       printRestore "$2" "$3" "$4" ;;
     user)
-      printUser "$2"
-      printFooter ;;
+      printUser "$2" ;;
     qos)
-      printQos "$2"
-      printFooter ;;
+      printQos "$2" ;;
     sinfo)
-      printSinfo "$2"
-      printFooter ;;
+      printSinfo "$2" ;;
     all)
-      printAll
-      printFooter ;;
+      printAll ;;
     *)
       # Display list of rcchelp commands for bad commands
-      printAll
-      printFooter ;;
+      printAll ;;
   esac
+  printFooter
 }
 
 # Call function with input parameters
