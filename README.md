@@ -4,7 +4,7 @@
 
 This is a personal repository for storing my work for **Redo rcchelp** project for the Research Computing Center at the University of Chicago.
 
-The new rcchelp script can be found in `/bash/rcchelp.sh`.
+The new rcchelp Bash script can be found in `/bash/rcchelp.sh`.
 
 To run the script, type the following in the command line:
 ```
