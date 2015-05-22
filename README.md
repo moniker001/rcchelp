@@ -11,6 +11,11 @@ To run the script, type the following in the command line:
 ./rcchelp.sh [[options]]
 ```
 
+If unable to run, change permissions with the following command:
+```
+chmod a+x rcchelp.sh
+```
+
 ## Functionalities
 
 Here are the retained functionalities in the new `rcchelp` that have been implemented.
