@@ -209,8 +209,15 @@ printUser () {
       fi
     done
     
+    # Obtain groups user is member of
+    groupinfo=$(groups $1 /non_existing_dir 2>&1)
+    if [[ $groupinfo == *"/non_existing_dir"* ]]; then
+      groupinfo=$(groups $1)
+    else
+      groupinfo=""
+    fi
+    
     # Print names of groups
-    groupinfo=$(echo groups $1)
     group1=$(echo $groupinfo | cut --fields=3 --delimiter=' ')
     if [ ${#group1} -gt 0 ]; then
       groupnum=$(getent group $group1 | cut --fields=3 --delimiter=':')
