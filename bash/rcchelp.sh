@@ -210,8 +210,7 @@ printUser () {
     done
     
     # Print names of groups
-    groupinfo=$(groups $1)
-    
+    groupinfo=$(echo groups $1)
     group1=$(echo $groupinfo | cut --fields=3 --delimiter=' ')
     if [ ${#group1} -gt 0 ]; then
       groupnum=$(getent group $group1 | cut --fields=3 --delimiter=':')
